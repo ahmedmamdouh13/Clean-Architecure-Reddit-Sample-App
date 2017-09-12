@@ -7,6 +7,14 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+
 /**
  * Created by ahmedmamdouh13 on 11/09/17.
  */
@@ -25,21 +33,81 @@ public class MainPresenter {
     }
 
     public void  loadNotes()
-    {ArrayList<String> titles=new ArrayList<>();
-        try {
-            List<MainModelDataBase> list = MainModelDataBase.listAll(MainModelDataBase.class);
-            for (int i=list.size()-1;i>=0;i--){
-
-                titles.add(list.get(i).getTitle());
-
+    {
+       Single single= mainModel.getNotes();
+        final ArrayList<String> titles=new ArrayList<>();
+        SingleObserver<List<MainModelDataBase>> observer= new SingleObserver<List<MainModelDataBase>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                Log.d("tag", "OnSubscribeThread "+Thread.currentThread().getName());
             }
 
-         Log.d("presenteritems",list.get(0).getTitle());
-            mainView.displayNotes(titles);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+            @Override
+            public void onSuccess(@NonNull List<MainModelDataBase> mainModelDataBases) {
+
+                for (int i=mainModelDataBases.size()-1;i>=0;i--) {
+                    titles.add(mainModelDataBases.get(i).getTitle());
+                }
+                    Log.d("tag","OnSuccessThread "+ Thread.currentThread().getName());
+                mainView.displayNotes(titles);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d("tag","ErrorThread "+ Thread.currentThread().getName());
+               e.printStackTrace();
+            }
+
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//
+//
+//               Log.d("tag", "OnSubscribeThread "+Thread.currentThread().getName());
+//
+//            }
+//
+//            @Override
+//            public void onNext(@NonNull List<MainModelDataBase> mainModelDataBases) {
+//
+//                for (int i=mainModelDataBases.size()-1;i>=0;i--){
+//
+//                titles.add(mainModelDataBases.get(i).getTitle());
+//                    Log.d("tag","OnNextThread "+ Thread.currentThread().getName());
+//
+//            }
+//
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//
+//                Log.d("tag","ErrorThread "+ Thread.currentThread().getName());
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                Log.d("tag","CompleteThread "+ Thread.currentThread().getName());
+//                mainView.displayNotes(titles);
+//            }
+        };
+        single.subscribe(observer);
+
+//        ArrayList<String> titles=new ArrayList<>();
+//        try {
+//            List<MainModelDataBase> list = MainModelDataBase.listAll(MainModelDataBase.class);
+//            for (int i=list.size()-1;i>=0;i--){
+//
+//                titles.add(list.get(i).getTitle());
+//
+//            }
+//
+//         Log.d("presenteritems",list.get(0).getTitle());
+//            mainView.displayNotes(titles);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -90,12 +158,10 @@ public class MainPresenter {
                     title = list.get(mpos).getTitle();
                     note = list.get(mpos).getNote();
                 }
-
             }
             intent.putExtra("title",title);
             intent.putExtra("note",note);
             intent.putExtra("position",mpos);
-
             mContext.startActivity(intent);
         }
         catch (Exception e){
