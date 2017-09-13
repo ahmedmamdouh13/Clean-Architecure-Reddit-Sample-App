@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 public class NewNoteActivity extends AppCompatActivity implements NewNoteView {
 

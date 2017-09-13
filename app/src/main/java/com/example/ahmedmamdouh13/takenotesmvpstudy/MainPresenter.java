@@ -3,17 +3,22 @@ package com.example.ahmedmamdouh13.takenotesmvpstudy;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
+import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.Disposables;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by ahmedmamdouh13 on 11/09/17.
@@ -21,11 +26,11 @@ import io.reactivex.functions.Consumer;
 
 public class MainPresenter {
 
-    MainView mainView;
-    MainModel mainModel;
+   private MainView mainView;
+   private MainModel mainModel;
 
-    Context mContext;
-
+   private Context mContext;
+    private CompositeDisposable compositeDisposable=new CompositeDisposable();
     public MainPresenter(Context context,MainView mainView,MainModel mainModel){
         this.mContext=context;
         this.mainView = mainView;
@@ -34,17 +39,12 @@ public class MainPresenter {
 
     public void  loadNotes()
     {
-       Single single= mainModel.getNotes();
-        final ArrayList<String> titles=new ArrayList<>();
-        SingleObserver<List<MainModelDataBase>> observer= new SingleObserver<List<MainModelDataBase>>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                Log.d("tag", "OnSubscribeThread "+Thread.currentThread().getName());
-            }
 
+        final ArrayList<String> titles=new ArrayList<>();
+        compositeDisposable.add(
+        mainModel.getNotes().subscribeWith(new DisposableSingleObserver<List<MainModelDataBase>>() {
             @Override
             public void onSuccess(@NonNull List<MainModelDataBase> mainModelDataBases) {
-
                 for (int i=mainModelDataBases.size()-1;i>=0;i--) {
                     titles.add(mainModelDataBases.get(i).getTitle());
                 }
@@ -57,6 +57,32 @@ public class MainPresenter {
                 Log.d("tag","ErrorThread "+ Thread.currentThread().getName());
                e.printStackTrace();
             }
+        }));
+
+//        final SingleObserver<List<MainModelDataBase>> observer= new SingleObserver<List<MainModelDataBase>>() {
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//                Log.d("tag", "OnSubscribeThread "+Thread.currentThread().getName());
+//                disposable=d;
+//            }
+//
+//            @Override
+//            public void onSuccess(@NonNull List<MainModelDataBase> mainModelDataBases) {
+//
+//                for (int i=mainModelDataBases.size()-1;i>=0;i--) {
+//                    titles.add(mainModelDataBases.get(i).getTitle());
+//                }
+//                    Log.d("tag","OnSuccessThread "+ Thread.currentThread().getName());
+//                mainView.displayNotes(titles);
+//               disposable.dispose();
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//                Log.d("tag","ErrorThread "+ Thread.currentThread().getName());
+//               e.printStackTrace();
+//            }
+
 
 //            @Override
 //            public void onSubscribe(@NonNull Disposable d) {
@@ -90,8 +116,10 @@ public class MainPresenter {
 //                Log.d("tag","CompleteThread "+ Thread.currentThread().getName());
 //                mainView.displayNotes(titles);
 //            }
-        };
-        single.subscribe(observer);
+
+
+//        single.subscribe(observer);
+
 
 //        ArrayList<String> titles=new ArrayList<>();
 //        try {
@@ -178,5 +206,9 @@ public class MainPresenter {
                 list.get((list.size()-1)-i).delete();
             }
         }
+    }
+
+    public void unSubscribe() {
+        compositeDisposable.clear();
     }
 }

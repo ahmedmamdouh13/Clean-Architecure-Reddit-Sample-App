@@ -2,10 +2,13 @@ package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
 import com.orm.SugarRecord;
 
+
 import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.operators.single.SingleDoAfterSuccess;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -34,8 +37,9 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
 
 
         Single<List<MainModelDataBase>> single=Single.just(MainModelDataBase.listAll(MainModelDataBase.class))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .subscribeOn(Schedulers.newThread());
+
+
 //        Observable<List<MainModelDataBase>> observable=Observable.just(MainModelDataBase.listAll(MainModelDataBase.class))
 //                .subscribeOn(Schedulers.io())
 //              .observeOn(AndroidSchedulers.mainThread());

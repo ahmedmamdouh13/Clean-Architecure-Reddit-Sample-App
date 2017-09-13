@@ -4,19 +4,30 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxAbsListView;
+import com.jakewharton.rxbinding2.widget.RxAdapter;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 
 import java.util.ArrayList;
+import java.util.jar.Manifest;
 
-import butterknife.BindView;
+import io.reactivex.functions.Consumer;
+
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
-    @BindView(R.id.ListView)ListView listView;
-    @BindView(R.id.FAB)FloatingActionButton FAB;
+    ListView listView;
+   FloatingActionButton FAB;
     ArrayAdapter arrayAdapter;
     MainPresenter presenter;
 
@@ -35,16 +46,33 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         FAB=(FloatingActionButton) findViewById(R.id.FAB);
 
-        FAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.addNote();
-                finish();
-            }
+        RxView.clicks(FAB).subscribe(aVoid->{
+            presenter.addNote();
+            finish();
         });
+
+//        FAB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
       // presenter.saveNotes("ahmed","nooooooootes");
+        RxPermissions rxpermissions=new RxPermissions(this);
+        rxpermissions.request(android.Manifest.permission.ACCESS_FINE_LOCATION).subscribe(granted->{
+            if (granted){
+                Toast.makeText(this, "granted!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this, "not granted!", Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
 
         presenter.loadNotes();
+
 
 
     }
@@ -89,5 +117,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onResume();
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Destroy","UnSubscribed !");
+        presenter.unSubscribe();
     }
 }
