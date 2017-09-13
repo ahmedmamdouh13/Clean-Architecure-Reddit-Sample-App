@@ -1,6 +1,7 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
    FloatingActionButton FAB;
     ArrayAdapter arrayAdapter;
     MainPresenter presenter;
+    ArrayList savedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         RxView.clicks(FAB).subscribe(aVoid->{
             presenter.addNote();
-            finish();
+           // finish();
         });
 
 //        FAB.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +73,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
         });
 
 
+        if (savedInstanceState!=null){
+            displayNotes(savedList);
+        }else
         presenter.loadNotes();
+
 
 
 
@@ -83,13 +89,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
      final ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
 
+        savedList=list;
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 presenter.editNote(i);
-                finish();
+              //  finish();
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -124,5 +131,19 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onDestroy();
         Log.d("Destroy","UnSubscribed !");
         presenter.unSubscribe();
+    }
+
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        savedList=(ArrayList) savedInstanceState.get("list");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putStringArrayList("list",savedList);
+
+        super.onSaveInstanceState(outState);
     }
 }

@@ -51,7 +51,7 @@ public class NewNoteActivity extends AppCompatActivity implements NewNoteView {
              String  note=noteText.getText().toString();
               String title=titleText.getText().toString();
                 notePresenter.save(note,title,position);
-                finish();
+               finish();
             }
         });
 

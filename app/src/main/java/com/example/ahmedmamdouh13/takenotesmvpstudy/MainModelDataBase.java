@@ -4,6 +4,7 @@ import com.orm.SugarRecord;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,7 +38,10 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
 
 
         Single<List<MainModelDataBase>> single=Single.just(MainModelDataBase.listAll(MainModelDataBase.class))
-                .subscribeOn(Schedulers.newThread());
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+              //  .delaySubscription(5000, TimeUnit.MILLISECONDS)
+                ;
 
 
 //        Observable<List<MainModelDataBase>> observable=Observable.just(MainModelDataBase.listAll(MainModelDataBase.class))
