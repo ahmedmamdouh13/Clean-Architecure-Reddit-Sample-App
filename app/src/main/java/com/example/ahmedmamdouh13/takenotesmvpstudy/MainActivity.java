@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
          listView= (ListView) findViewById(R.id.ListView);
 
-        Intent intent=getIntent();
-       presenter.getIntent(intent);
+
+
 
         FAB=(FloatingActionButton) findViewById(R.id.FAB);
 
@@ -87,16 +87,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void displayNotes(final ArrayList<String> list) {
 
-     final ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,list);
+//        if (savedList==null) {
+//            savedList = list;
+//        }
+        if (list!=null){
+           savedList=list;
+        }
+     final ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,savedList);
 
-        savedList=list;
+
+
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 presenter.editNote(i);
-              //  finish();
+//              finish();
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -105,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
                 presenter.deleteNote(i);
 
-                list.remove(i);
+                savedList.remove(i);
                 arrayAdapter.notifyDataSetChanged();
                 return true;
             }
@@ -123,13 +130,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     protected void onResume() {
         super.onResume();
 
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Destroy","UnSubscribed !");
         presenter.unSubscribe();
     }
 
@@ -145,5 +150,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
         outState.putStringArrayList("list",savedList);
 
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (intent.getStringExtra("title")!=null) {
+            presenter.getIntent(intent);
+        }
+        super.onNewIntent(intent);
     }
 }

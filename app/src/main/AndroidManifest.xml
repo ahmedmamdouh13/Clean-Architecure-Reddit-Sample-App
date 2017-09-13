@@ -17,8 +17,10 @@
         <meta-data android:name="QUERY_LOG" android:value="true" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.example.ahmedmamdouh13.takenotesmvpstudy" />
         <activity android:name=".MainActivity"
-            android:launchMode = "singleInstance"
+            android:launchMode="singleInstance"
             >
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewNoteActivity"
-            android:launchMode = "singleInstance"
+
             ></activity>
     </application>
 
