@@ -1,6 +1,9 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
+import android.util.Log;
+
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 
 import java.util.List;
@@ -22,6 +25,7 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
     private String title;
     private String note;
 
+
     public MainModelDataBase(){
     }
 
@@ -41,6 +45,7 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
               //  .delaySubscription(5000, TimeUnit.MILLISECONDS)
+
                 ;
 
 

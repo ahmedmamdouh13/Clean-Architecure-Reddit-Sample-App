@@ -14,5 +14,12 @@ import io.reactivex.Single;
 public interface MainModel {
 
     Single<List<MainModelDataBase>> getNotes();
+    public String getTitle();
+
+    public String getNote();
+
+    public void setNote(String note);
+
+    public void setTitle(String title);
 
 }

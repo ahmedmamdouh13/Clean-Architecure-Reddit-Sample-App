@@ -157,14 +157,17 @@ public class MainPresenter {
         int pos = intent.getIntExtra("position",-1);
         if (note!=null||title!=null) {
             if (pos!=-1){
+
                 List<MainModelDataBase> mainModel = MainModelDataBase.listAll(MainModelDataBase.class);
 
                 mainModel.get(pos).setNote(note);
                 mainModel.get(pos).setTitle(title);
                 mainModel.get(pos).save();
+                loadNotes();
             }else {
                 MainModelDataBase mainModel = new MainModelDataBase(title, note);
                 mainModel.save();
+                loadNotes();
             }
         }
 
@@ -210,5 +213,6 @@ public class MainPresenter {
 
     public void unSubscribe() {
         compositeDisposable.clear();
+        Log.d("fromDestroy","UnSubscribed !");
     }
 }

@@ -5,6 +5,10 @@ import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +26,10 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.util.ArrayList;
 import java.util.jar.Manifest;
 
+import javax.inject.Inject;
+
+import dagger.*;
+import dagger.internal.DaggerCollections;
 import io.reactivex.functions.Consumer;
 
 
@@ -32,14 +40,21 @@ public class MainActivity extends AppCompatActivity implements MainView {
     ArrayAdapter arrayAdapter;
     MainPresenter presenter;
     ArrayList savedList;
+    @Inject
+    MainModelDataBase mainModelDataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainModel mainModel=new MainModelDataBase();
-        presenter=new MainPresenter(this,this,mainModel);
+
+        ((mApplication)getApplication()).getComponent().inject(this);
+
+
+
+
+        presenter=new MainPresenter(this,this,mainModelDataBase);
 
          listView= (ListView) findViewById(R.id.ListView);
 
@@ -77,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
             displayNotes(savedList);
         }else
         presenter.loadNotes();
+
+
 
 
 
@@ -154,9 +171,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if (intent.getStringExtra("title")!=null) {
+       // if (intent.getStringExtra("title")!=null) {
             presenter.getIntent(intent);
-        }
+      //  }
         super.onNewIntent(intent);
     }
 }
