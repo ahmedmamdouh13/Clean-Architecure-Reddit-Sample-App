@@ -1,6 +1,5 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
@@ -13,5 +12,6 @@ public interface Component {
 
     void inject(MainActivity activity);
     void inject(mApplication application);
+    void inject(RedditActivity redditActivity);
 
 }

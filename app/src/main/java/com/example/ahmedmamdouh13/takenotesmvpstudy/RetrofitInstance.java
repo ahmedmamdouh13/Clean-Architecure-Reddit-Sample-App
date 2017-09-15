@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitInstance {
-    public static final String SERVICE_ENDPOINT="https://newsapi.org";
+    public static final String SERVICE_ENDPOINT="https://www.reddit.com";
     public static  Retrofit retrofit=null;
 
     public static Retrofit getRetrofitinstance(){

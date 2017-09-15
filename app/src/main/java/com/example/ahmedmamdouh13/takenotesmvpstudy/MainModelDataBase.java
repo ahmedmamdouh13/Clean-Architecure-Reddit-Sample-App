@@ -25,8 +25,6 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
 
     private String title;
     private String note;
-    private String url="https://newsapi.org/v1/articles?source=reddit-r-all&sortBy=latest&apiKey=b1b7e58c35b6453dbaa1fe64b757d711";
-
 
     public MainModelDataBase(){
     }

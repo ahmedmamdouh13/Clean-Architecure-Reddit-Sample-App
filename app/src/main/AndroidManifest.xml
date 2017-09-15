@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ahmedmamdouh13.takenotesmvpstudy">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".mApplication"
         android:allowBackup="true"
@@ -11,28 +12,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-        <meta-data android:name="DATABASE" android:value="mdb.db" />
-        <meta-data android:name="VERSION" android:value="2" />
-        <meta-data android:name="QUERY_LOG" android:value="true" />
-        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.example.ahmedmamdouh13.takenotesmvpstudy" />
-        <activity android:name=".MainActivity"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="mdb.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="2" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.example.ahmedmamdouh13.takenotesmvpstudy" />
+
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            >
-
-
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewNoteActivity"
-            android:screenOrientation="portrait"
-
-            ></activity>
+        <activity
+            android:name=".RedditActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

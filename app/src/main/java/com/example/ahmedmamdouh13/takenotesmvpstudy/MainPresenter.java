@@ -23,7 +23,7 @@ public class MainPresenter {
    private MainView mainView;
    private MainModel mainModel;
 
-    RedditService redditService;
+    RetrofitService redditService;
     RetrofitInstance retrofitInstance;
     redditEntryPojo topic;
    private Context mContext;
@@ -143,7 +143,7 @@ public class MainPresenter {
     }
 
     public void addNote(){
-        mContext.startActivity(new Intent(mContext,NewNoteActivity.class));
+        mContext.startActivity(new Intent(mContext,RedditActivity.class));
     }
 
 
@@ -172,7 +172,7 @@ public class MainPresenter {
 
     public void editNote(int position) {
 
-        Intent intent=new Intent(mContext,NewNoteActivity.class);
+        Intent intent=new Intent(mContext,RedditActivity.class);
         String title="";
         String note="";
 
@@ -214,34 +214,34 @@ public class MainPresenter {
     }
 
     public void requestTopics(){
-
-        redditService=RetrofitInstance.getRetrofitinstance().create(RedditService.class);
-
-        redditService.listTopics()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<redditEntryPojo>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@NonNull redditEntryPojo entry) {
-
-                for (int i=0;i<entry.getArticles().size();i++)
-                Log.d("onNext","topics : "+entry.getArticles().get(i).getTitle());
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.d("onError","erroooooorrrr " + e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
+//
+//        redditService=RetrofitInstance.getRetrofitinstance().create(RetrofitService.class);
+//
+//        redditService.listTopics()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<redditEntryPojo>() {
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(@NonNull redditEntryPojo entry) {
+//
+//                for (int i=0;i<entry.getArticles().size();i++)
+//                Log.d("onNext","topics : "+entry.getArticles().get(i).getTitle());
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//                Log.d("onError","erroooooorrrr " + e.getMessage());
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
     }
 }

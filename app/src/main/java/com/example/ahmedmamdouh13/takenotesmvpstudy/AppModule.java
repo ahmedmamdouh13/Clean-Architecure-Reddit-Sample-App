@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
 
 /**
  * Created by ahmedmamdouh13 on 14/09/17.
@@ -35,5 +36,10 @@ public class AppModule {
         return new MainModelDataBase();
     }
 
+    @Provides
+    @Singleton
+    RetrofitService retrofitInstance(){
+        return RetrofitInstance.getRetrofitinstance().create(RetrofitService.class);
+    }
 
 }

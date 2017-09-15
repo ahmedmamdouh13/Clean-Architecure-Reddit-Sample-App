@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 //            }
 //
 //        });
-        presenter.requestTopics();
+      //  presenter.requestTopics();
 
 
         if (savedInstanceState!=null){

@@ -26,8 +26,11 @@ public class mApplication extends Application {
                 .appModule(new AppModule(this)).build();
 
         component.inject(this);
+        component.inject(this);
+
 
     }
+
 
     public Component getComponent() {
         return component;
