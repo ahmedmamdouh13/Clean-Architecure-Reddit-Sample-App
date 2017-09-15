@@ -3,7 +3,7 @@ package com.example.ahmedmamdouh13.takenotesmvpstudy;
 import android.app.Application;
 import android.content.Context;
 
-import java.util.List;
+
 
 import javax.inject.Singleton;
 

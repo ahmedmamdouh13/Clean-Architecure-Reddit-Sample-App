@@ -1,36 +1,20 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxAbsListView;
-import com.jakewharton.rxbinding2.widget.RxAdapter;
-import com.tbruyelle.rxpermissions2.Permission;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 
 import java.util.ArrayList;
-import java.util.jar.Manifest;
 
 import javax.inject.Inject;
-
-import dagger.*;
-import dagger.internal.DaggerCollections;
-import io.reactivex.functions.Consumer;
 
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -75,17 +59,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
 //            }
 //        });
       // presenter.saveNotes("ahmed","nooooooootes");
-        RxPermissions rxpermissions=new RxPermissions(this);
-        rxpermissions.request(android.Manifest.permission.ACCESS_FINE_LOCATION).subscribe(granted->{
-            if (granted){
-                Toast.makeText(this, "granted!", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(this, "not granted!", Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+//        RxPermissions rxpermissions=new RxPermissions(this);
+//        rxpermissions.request(android.Manifest.permission.ACCESS_FINE_LOCATION).subscribe(granted->{
+//            if (granted){
+//                Toast.makeText(this, "granted!", Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+//                Toast.makeText(this, "not granted!", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
+        presenter.requestTopics();
 
 
         if (savedInstanceState!=null){
@@ -114,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
 
 
+        if(listView!=null)
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

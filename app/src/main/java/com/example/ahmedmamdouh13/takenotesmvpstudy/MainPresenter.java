@@ -5,19 +5,13 @@ import android.content.Intent;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
-import io.reactivex.Observable;
+
 import io.reactivex.Observer;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.plugins.RxAndroidPlugins;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.disposables.Disposables;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -29,6 +23,9 @@ public class MainPresenter {
    private MainView mainView;
    private MainModel mainModel;
 
+    RedditService redditService;
+    RetrofitInstance retrofitInstance;
+    redditEntryPojo topic;
    private Context mContext;
     private CompositeDisposable compositeDisposable=new CompositeDisposable();
     public MainPresenter(Context context,MainView mainView,MainModel mainModel){
@@ -214,5 +211,37 @@ public class MainPresenter {
     public void unSubscribe() {
         compositeDisposable.clear();
         Log.d("fromDestroy","UnSubscribed !");
+    }
+
+    public void requestTopics(){
+
+        redditService=RetrofitInstance.getRetrofitinstance().create(RedditService.class);
+
+        redditService.listTopics()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<redditEntryPojo>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull redditEntryPojo entry) {
+
+                for (int i=0;i<entry.getArticles().size();i++)
+                Log.d("onNext","topics : "+entry.getArticles().get(i).getTitle());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d("onError","erroooooorrrr " + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }

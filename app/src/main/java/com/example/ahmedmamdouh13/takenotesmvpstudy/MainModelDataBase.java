@@ -14,6 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.operators.single.SingleDoAfterSuccess;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 /**
  * Created by ahmedmamdouh13 on 11/09/17.
@@ -24,6 +25,7 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
 
     private String title;
     private String note;
+    private String url="https://newsapi.org/v1/articles?source=reddit-r-all&sortBy=latest&apiKey=b1b7e58c35b6453dbaa1fe64b757d711";
 
 
     public MainModelDataBase(){
@@ -40,12 +42,10 @@ public class MainModelDataBase extends SugarRecord implements MainModel{
     @Override
     public Single<List<MainModelDataBase>> getNotes() {
 
-
         Single<List<MainModelDataBase>> single=Single.just(MainModelDataBase.listAll(MainModelDataBase.class))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
               //  .delaySubscription(5000, TimeUnit.MILLISECONDS)
-
                 ;
 
 
