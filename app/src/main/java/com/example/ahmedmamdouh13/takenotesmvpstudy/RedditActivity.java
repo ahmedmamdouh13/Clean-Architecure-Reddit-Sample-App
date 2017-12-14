@@ -18,21 +18,21 @@ import retrofit2.Retrofit;
 public class RedditActivity extends AppCompatActivity implements RedditView {
 
 
-    EditText noteText;
-    EditText titleText;
-     Button saveButton;
-    RedditPresenter redditPresenter;
-    String note;
     String title;
     @Inject
     RetrofitService retrofitService;
+
+    RedditPresenter redditPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reddit);
         ((mApplication)getApplication()).getComponent().inject(this);
-        redditPresenter=new RedditPresenter(this,retrofitService,this);
+
+        redditPresenter=new RedditPresenter();
+        redditPresenter.bind(this,this);
+        ((mApplication)getApplication()).getComponent().inject(redditPresenter);
 
 
 

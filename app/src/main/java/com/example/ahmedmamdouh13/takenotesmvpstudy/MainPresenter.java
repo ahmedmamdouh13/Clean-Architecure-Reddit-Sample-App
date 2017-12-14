@@ -6,6 +6,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -18,35 +20,27 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ahmedmamdouh13 on 11/09/17.
  */
 
-public class MainPresenter {
+public class MainPresenter extends BasePresenter<MainView>{
 
-   private MainView mainView;
-   private MainModel mainModel;
 
-    RetrofitService redditService;
-    RetrofitInstance retrofitInstance;
-    redditEntryPojo topic;
-   private Context mContext;
+    @Inject
+    MainModelDataBase mainModelDataBase;
+
     private CompositeDisposable compositeDisposable=new CompositeDisposable();
-    public MainPresenter(Context context,MainView mainView,MainModel mainModel){
-        this.mContext=context;
-        this.mainView = mainView;
-        this.mainModel=mainModel;
-    }
 
     public void  loadNotes()
     {
 
         final ArrayList<String> titles=new ArrayList<>();
         compositeDisposable.add(
-        mainModel.getNotes().subscribeWith(new DisposableSingleObserver<List<MainModelDataBase>>() {
+        mainModelDataBase.getNotes().subscribeWith(new DisposableSingleObserver<List<MainModelDataBase>>() {
             @Override
             public void onSuccess(@NonNull List<MainModelDataBase> mainModelDataBases) {
                 for (int i=mainModelDataBases.size()-1;i>=0;i--) {
                     titles.add(mainModelDataBases.get(i).getTitle());
                 }
                     Log.d("tag","OnSuccessThread "+ Thread.currentThread().getName());
-                mainView.displayNotes(titles);
+                getView().displayNotes(titles);
             }
 
             @Override
@@ -143,7 +137,7 @@ public class MainPresenter {
     }
 
     public void addNote(){
-        mContext.startActivity(new Intent(mContext,RedditActivity.class));
+        getContext().startActivity(new Intent(getContext(),RedditActivity.class));
     }
 
 
@@ -172,7 +166,7 @@ public class MainPresenter {
 
     public void editNote(int position) {
 
-        Intent intent=new Intent(mContext,RedditActivity.class);
+        Intent intent=new Intent(getContext(),RedditActivity.class);
         String title="";
         String note="";
 
@@ -190,7 +184,7 @@ public class MainPresenter {
             intent.putExtra("title",title);
             intent.putExtra("note",note);
             intent.putExtra("position",mpos);
-            mContext.startActivity(intent);
+            getContext().startActivity(intent);
         }
         catch (Exception e){
             e.printStackTrace();

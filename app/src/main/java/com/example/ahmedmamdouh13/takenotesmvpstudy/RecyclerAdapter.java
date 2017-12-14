@@ -41,7 +41,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
        // holder.textView.setText(pojo.getData().getChildren().get(position).getData().getTitle());
         if (pojo.getData().getChildren().get(position).getData().getPreview()!=null) {
-            holder.setViews(pojo.getData().getChildren().get(position).getData().getTitle(), pojo.getData().getChildren().get(position).getData().getPreview().getImages().get(0).getSource().getUrl(), position,pojo.getData().getChildren().get(position).getData().getSelftext());
+            holder.setViews(pojo.getData().getChildren().get(position).getData().getTitle(),
+                    pojo.getData().getChildren().get(position).getData().getPreview().getImages().get(0).getSource().getUrl(),
+                    position,pojo.getData().getChildren().get(position).getData().getSelftext());
         }
         else
             holder.setViews(pojo.getData().getChildren().get(position).getData().getTitle(), null, position,pojo.getData().getChildren().get(position).getData().getSelftext());
@@ -73,7 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
         public void setViews(String title,String url,int position,String desc){
             textView.setText(title);
             textView2.setText(desc);
-            if (url!=null)
+           // if (url!=null)
             Picasso.with(context).load(url).error(R.drawable.ic_add_black_24dp).into(imageView);
             this.position=position;
         }

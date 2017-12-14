@@ -14,7 +14,16 @@ import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.ArrayList;
 
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 
 public class MainActivity extends AppCompatActivity implements MainView {
@@ -24,21 +33,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
     ArrayAdapter arrayAdapter;
     MainPresenter presenter;
     ArrayList savedList;
-    @Inject
-    MainModelDataBase mainModelDataBase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        presenter=new MainPresenter();
 
         ((mApplication)getApplication()).getComponent().inject(this);
 
 
 
 
-        presenter=new MainPresenter(this,this,mainModelDataBase);
+
+
+
+        presenter.bind(this,this);
+        ((mApplication)getApplication()).getComponent().inject( presenter);
 
          listView= (ListView) findViewById(R.id.ListView);
 
@@ -75,8 +88,51 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         if (savedInstanceState!=null){
             displayNotes(savedList);
-        }else
-        presenter.loadNotes();
+        }else {
+            presenter.loadNotes();
+        }
+
+
+
+
+
+        Observable<Integer> observable1=Observable.just(1);
+        Observable<Integer> observable2=Observable.just(1,2);
+
+        Observable<Observable<Integer>> observable3 =
+                Observable.just(observable1,observable2)
+                       .map(integer -> integer)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread());
+
+
+        Observer<Observable<Integer>> observer= new Observer<Observable<Integer>>() {
+
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Observable<Integer> integerObservable) {
+               // Timber.d(integerObservable.subscribeWith());
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+
+        observable3.subscribeWith(observer);
+
 
 
 
@@ -102,23 +158,17 @@ public class MainActivity extends AppCompatActivity implements MainView {
         if(listView!=null)
         listView.setAdapter(arrayAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                presenter.editNote(i);
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            presenter.editNote(i);
 //              finish();
-            }
         });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
 
-                presenter.deleteNote(i);
+            presenter.deleteNote(i);
 
-                savedList.remove(i);
-                arrayAdapter.notifyDataSetChanged();
-                return true;
-            }
+            savedList.remove(i);
+            arrayAdapter.notifyDataSetChanged();
+            return true;
         });
 
     }

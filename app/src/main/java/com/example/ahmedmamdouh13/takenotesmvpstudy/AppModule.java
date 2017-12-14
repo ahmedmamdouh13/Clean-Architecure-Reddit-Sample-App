@@ -30,6 +30,8 @@ public class AppModule {
         return mApplication;
     }
 
+
+
     @Provides
     @Singleton
     MainModelDataBase Database(){
