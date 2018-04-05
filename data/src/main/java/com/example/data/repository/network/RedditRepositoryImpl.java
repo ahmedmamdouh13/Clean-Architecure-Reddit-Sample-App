@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -34,7 +35,7 @@ public class RedditRepositoryImpl implements RedditRepository {
          RetrofitInstance.getRetrofitinstance().create(RetrofitService.class).listTopics()
                 .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel))
                  .subscribeOn(Schedulers.io())
-
+                 .observeOn(AndroidSchedulers.mainThread())
                  .subscribeWith(observer);
         Timber.d("networking in data layer");
     }

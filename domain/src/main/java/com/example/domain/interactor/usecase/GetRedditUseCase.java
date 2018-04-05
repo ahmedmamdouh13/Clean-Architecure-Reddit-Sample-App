@@ -1,7 +1,9 @@
-package com.example.domain.usecase;
+package com.example.domain.interactor.usecase;
 
 
 
+import com.example.domain.interactor.GetRedditInteractor;
+import com.example.domain.interactor.usecase.base.UseCase;
 import com.example.domain.model.Posts;
 import com.example.domain.repository.RedditRepository;
 

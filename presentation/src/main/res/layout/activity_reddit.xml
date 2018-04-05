@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ahmedmamdouh13.takenotesmvpstudy.module.RedditActivity"
+    tools:context="com.example.ahmedmamdouh13.takenotesmvpstudy.ui.RedditActivity"
     android:id="@+id/activity_reddit"
     >
 
@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"
+        android:layout_gravity="center"
         >
 
 

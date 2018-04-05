@@ -1,9 +1,9 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
-import com.example.ahmedmamdouh13.takenotesmvpstudy.module.MainActivity;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.models.MainModel;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter.MainPresenter;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.MainView;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.MainActivity;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models.MainModel;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter.MainPresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view.MainView;
 
 import org.junit.Assert;
 import org.junit.Rule;

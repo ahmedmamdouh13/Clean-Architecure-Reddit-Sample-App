@@ -1,15 +1,14 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter;
 
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.ahmedmamdouh13.takenotesmvpstudy.base.BasePresenter;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.MainView;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.module.RedditActivity;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base.BasePresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view.MainView;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.RedditActivity;
 
 import javax.inject.Inject;
 
-import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**

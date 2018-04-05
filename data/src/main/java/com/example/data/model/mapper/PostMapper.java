@@ -29,8 +29,9 @@ public class PostMapper {
             Data_ data = redditPostsModel.getData().getChildren().get(i).getData();
             Posts post=new Posts();
             post.setName(data.getTitle());
-            post.setImgurl(data.getThumbnail());
-            post.setArticle(data.getTitle());
+            if (data.getPreview()!=null)
+            post.setImgurl(data.getPreview().getImages().get(0).getSource().getUrl());
+            post.setArticle(data.getSelftext());
             postsList.add(post);
             Timber.d(data.getAuthor());
         }

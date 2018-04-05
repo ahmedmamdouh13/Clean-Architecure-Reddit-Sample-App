@@ -1,10 +1,9 @@
-package com.example.domain.usecase;
+package com.example.domain.interactor;
 
 import com.example.domain.model.Posts;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 
 /**

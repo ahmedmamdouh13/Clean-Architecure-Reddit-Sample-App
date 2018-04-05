@@ -1,19 +1,12 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter;
 
-import android.content.Intent;
-import android.support.v7.app.WindowDecorActionBar;
-
-import com.example.ahmedmamdouh13.takenotesmvpstudy.module.MainActivity;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.base.BasePresenter;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.RedditView;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.application.mApplication;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.mapper.PostModelViewMapper;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.mapper.PostModelViewMapperImpl;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base.BasePresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view.RedditView;
 import com.example.domain.model.Posts;
-import com.example.domain.repository.RedditRepository;
-import com.example.domain.usecase.GetRedditInteractor;
-import com.example.domain.usecase.GetRedditUseCase;
-import com.example.domain.usecase.SavePostInteractor;
-import com.example.domain.usecase.SavePostUseCase;
-import com.example.domain.usecase.UseCase;
+import com.example.domain.interactor.GetRedditInteractor;
+import com.example.domain.interactor.SavePostInteractor;
 
 
 import java.util.List;
@@ -36,6 +29,8 @@ public class RedditPresenter extends BasePresenter<RedditView> {
     SavePostInteractor savePostUseCase;
     @Inject
     GetRedditInteractor getRedditUseCase;
+    @Inject
+    PostModelViewMapperImpl mapper;
 
 
     @Inject
@@ -103,14 +98,16 @@ public class RedditPresenter extends BasePresenter<RedditView> {
         }
 
         @Override
-        public void onNext(List<Posts> example) {
-            for (int i = 0; i < example.size(); i++) {
+        public void onNext(List<Posts> posts) {
+            for (int i = 0; i < posts.size(); i++) {
 
-                Timber.d(example.get(i).getName());
-                Timber.d(example.get(i).getArticle());
-                Timber.d(example.get(i).getImgurl());
+                Timber.d(posts.get(i).getName());
+                Timber.d(posts.get(i).getArticle());
+                Timber.d(posts.get(i).getImgurl());
+
 
             }
+            getView().displayPosts( mapper.mapPostsToPostsModelView(posts));
 
         }
 

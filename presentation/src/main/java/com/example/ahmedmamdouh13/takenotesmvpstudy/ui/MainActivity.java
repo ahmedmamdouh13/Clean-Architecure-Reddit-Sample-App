@@ -1,22 +1,16 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.module;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.ahmedmamdouh13.takenotesmvpstudy.R;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.application.mApplication;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.base.BaseActivity;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter.MainPresenter;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.MainView;
-import com.example.domain.model.Posts;
-import com.example.domain.repository.RedditRepository;
-import com.example.domain.usecase.SavePostInteractor;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base.BaseActivity;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter.MainPresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view.MainView;
 import com.jakewharton.rxbinding2.view.RxView;
 
 
@@ -25,11 +19,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
@@ -138,7 +127,9 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void initDagger() {
-        getDaggerComponent().inject(this);
+       getDaggerComponent().inject(this);
+
+
     }
 
     @Override

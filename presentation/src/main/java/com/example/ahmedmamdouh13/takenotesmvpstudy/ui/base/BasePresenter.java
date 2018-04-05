@@ -1,4 +1,4 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.base;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base;
 
 import android.content.Context;
 

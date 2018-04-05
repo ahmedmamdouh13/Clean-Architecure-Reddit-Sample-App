@@ -4,14 +4,14 @@ import android.app.Application;
 import android.content.Context;
 
 
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter.MainPresenter;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter.RedditPresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.mapper.PostModelViewMapper;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter.MainPresenter;
 import com.example.data.repository.network.RedditRepositoryImpl;
 import com.example.domain.repository.RedditRepository;
-import com.example.domain.usecase.GetRedditInteractor;
-import com.example.domain.usecase.GetRedditUseCase;
-import com.example.domain.usecase.SavePostInteractor;
-import com.example.domain.usecase.SavePostUseCase;
+import com.example.domain.interactor.GetRedditInteractor;
+import com.example.domain.interactor.usecase.GetRedditUseCase;
+import com.example.domain.interactor.SavePostInteractor;
+import com.example.domain.interactor.usecase.SavePostUseCase;
 
 import javax.inject.Singleton;
 
@@ -46,11 +46,6 @@ public class AppModule {
 //        return redditPresenter;
 //    }
 
-    @Provides
-    @Singleton
-    MainPresenter providesMainPresenter() {
-        return new MainPresenter();
-    }
 
     @Provides
     @Singleton
@@ -58,11 +53,6 @@ public class AppModule {
         return AndroidSchedulers.mainThread();
     }
 
-//    @Provides
-//    @Singleton
-//    SavePostUseCase providesSavePostUseCase(){
-//        return new SavePostUseCase();
-//    }
 @Provides
 @Singleton
 GetRedditInteractor providesGetRedditUseCase(GetRedditUseCase getRedditUseCase){

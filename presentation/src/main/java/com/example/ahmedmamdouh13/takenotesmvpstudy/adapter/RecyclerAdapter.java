@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmedmamdouh13.takenotesmvpstudy.R;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models.POJO.PostModel;
 import com.example.domain.model.Posts;
 import com.squareup.picasso.Picasso;
 
@@ -24,9 +25,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
 
     private  Context context;
-    private List<Posts> pojo;
+    private List<PostModel> pojo;
 
-    public RecyclerAdapter(Context context, List<Posts> pojo){
+    public RecyclerAdapter(Context context, List<PostModel> pojo){
 
         this.context = context;
         this.pojo = pojo;
@@ -55,6 +56,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 //        else
 //            holder.setViews(pojo.getData().getChildren().get(position).getData().getTitle(), null, position,pojo.getData().getChildren().get(position).getData().getSelftext());
 
+        holder.setViews(pojo.get(position).getName(),pojo.get(position).getImgurl(),position,pojo.get(position).getDexc());
     }
 
     @Override
@@ -83,8 +85,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
             Timber.d("yes yes two baby " + title);
             textView.setText(title);
             textView2.setText(desc);
-           // if (url!=null)
-            Picasso.with(context).load(url).error(R.drawable.ic_add_black_24dp).into(imageView);
+           if (url!=null) {
+               imageView.setVisibility(View.VISIBLE);
+               Picasso.with(context).load(url).resize(814, 452)
+                       .onlyScaleDown()
+                       .error(R.drawable.ic_add_black_24dp).into(imageView);
+           }
+           else
+               imageView.setVisibility(View.GONE);
             this.position=position;
         }
 

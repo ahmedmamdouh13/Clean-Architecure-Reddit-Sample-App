@@ -1,4 +1,4 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.module;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

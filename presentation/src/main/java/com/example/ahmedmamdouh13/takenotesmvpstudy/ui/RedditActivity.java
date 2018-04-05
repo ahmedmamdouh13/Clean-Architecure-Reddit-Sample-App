@@ -1,14 +1,20 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.module;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.ahmedmamdouh13.takenotesmvpstudy.R;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.adapter.RecyclerAdapter;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.application.mApplication;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter.RedditPresenter;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.RedditView;
-import com.example.domain.model.Posts;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models.POJO.PostModel;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter.RedditPresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view.RedditView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -31,6 +37,7 @@ public class RedditActivity extends AppCompatActivity implements RedditView {
 
 
         redditPresenter.bindContext(this);
+        redditPresenter.bind(this);
 
 
 
@@ -81,15 +88,15 @@ public class RedditActivity extends AppCompatActivity implements RedditView {
     }
 
     @Override
-    public void displayPosts(Posts pojo) {
+    public void displayPosts(List<PostModel> pojo) {
 
-//        Timber.d(pojo.getData().getChildren().get(1).getData().getAuthor()+"  yes yessss");
-//        RecyclerView recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
-//        RecyclerAdapter recyclerAdapter=new RecyclerAdapter(this,pojo);
-//        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(recyclerAdapter);
+       // Timber.d(pojo.getData().getChildren().get(1).getData().getAuthor()+"  yes yessss");
+        RecyclerView recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerAdapter recyclerAdapter=new RecyclerAdapter(this,pojo);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(recyclerAdapter);
 
 
     }

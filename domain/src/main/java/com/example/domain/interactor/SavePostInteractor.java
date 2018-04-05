@@ -1,4 +1,4 @@
-package com.example.domain.usecase;
+package com.example.domain.interactor;
 
 import com.example.domain.model.Posts;
 

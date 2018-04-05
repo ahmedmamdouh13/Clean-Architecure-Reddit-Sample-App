@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.di.component.DaggerComponent;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.di.module.AppModule;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.di.component.Component;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.di.module.PresentationModule;
 
 import timber.log.Timber;
 
@@ -30,6 +31,7 @@ public class mApplication extends Application {
         component= DaggerComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
+
 
         component.inject(this);
     }

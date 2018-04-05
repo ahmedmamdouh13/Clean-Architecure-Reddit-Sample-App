@@ -1,4 +1,4 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.models;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models;
 
 
 import com.example.domain.model.Posts;

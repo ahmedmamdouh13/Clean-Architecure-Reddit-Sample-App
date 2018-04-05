@@ -1,6 +1,6 @@
-package com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view;
+package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view;
 
-import com.example.ahmedmamdouh13.takenotesmvpstudy.base.BaseView;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base.BaseView;
 
 import java.util.ArrayList;
 

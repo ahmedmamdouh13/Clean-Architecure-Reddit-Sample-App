@@ -1,6 +1,6 @@
-package com.example.domain.usecase;
+package com.example.domain.interactor.usecase.base;
 
-import com.example.domain.interactor.Interactor;
+import com.example.domain.interactor.base.Interactor;
 
 import javax.inject.Inject;
 
