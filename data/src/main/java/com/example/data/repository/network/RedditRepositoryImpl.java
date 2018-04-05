@@ -9,6 +9,7 @@ import com.example.domain.repository.RedditRepository;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.functions.Function;
 
 /**
@@ -25,9 +26,9 @@ public class RedditRepositoryImpl implements RedditRepository {
    public RedditRepositoryImpl(){}
 
     @Override
-    public Observable<Posts> listTopics() {
-        return RetrofitInstance.getRetrofitinstance().create(RetrofitService.class).listTopics()
-                .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel));
+    public void listTopics(Observer<Posts> observer) {
+         RetrofitInstance.getRetrofitinstance().create(RetrofitService.class).listTopics()
+                .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel)).subscribe(observer);
     }
 
     @Override

@@ -18,14 +18,9 @@ public class SavePostUseCase extends UseCase<Posts> implements SavePostInteracto
 
     @Inject
     public SavePostUseCase(RedditRepository redditRepository) {
-
-
-//    @Inject
-//    public SavePostUseCase(RedditRepository repository){
-//
         this.repository =redditRepository;
-//    }
 }
+
     @Override
     public Observable<Posts> createObservable() {
         return null;

@@ -8,6 +8,7 @@ import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.RedditView;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.application.mApplication;
 import com.example.domain.model.Posts;
 import com.example.domain.repository.RedditRepository;
+import com.example.domain.usecase.GetRedditInteractor;
 import com.example.domain.usecase.GetRedditUseCase;
 import com.example.domain.usecase.SavePostInteractor;
 import com.example.domain.usecase.SavePostUseCase;
@@ -29,6 +30,8 @@ public class RedditPresenter extends BasePresenter<RedditView> {
     Posts pojo;
     @Inject
     SavePostInteractor savePostUseCase;
+    @Inject
+    GetRedditInteractor getRedditUseCase;
 
 
     @Inject
@@ -45,12 +48,12 @@ public class RedditPresenter extends BasePresenter<RedditView> {
 
     public void loadPosts(){
 
-    // useCase.execute(new RedditObserver());
+    getRedditUseCase.createPostObservable(new RedditObserver());
 
-    savePostUseCase.save(new Posts("ahmed"));
-        savePostUseCase.save(new Posts("log this man please !"));
-        savePostUseCase.save(new Posts("log this man please !"));
-        savePostUseCase.save(new Posts("log this man please !"));
+//    savePostUseCase.save(new Posts("ahmed"));
+//        savePostUseCase.save(new Posts("log this man please !"));
+//        savePostUseCase.save(new Posts("log this man please !"));
+//        savePostUseCase.save(new Posts("log this man please !"));
 
    //  repository.savePost(new Posts("ahmed"));
 //        retrofitServive.listTopics()

@@ -19,11 +19,6 @@ public abstract class  UseCase<T> implements Interactor<T> {
     @Inject
     Scheduler mainUischeduler;
 
-
-
-
-
-
     public abstract Observable<T> createObservable();
 
     @Override

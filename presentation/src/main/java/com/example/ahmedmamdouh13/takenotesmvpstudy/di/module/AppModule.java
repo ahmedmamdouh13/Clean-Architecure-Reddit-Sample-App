@@ -65,8 +65,8 @@ public class AppModule {
 //    }
 @Provides
 @Singleton
-GetRedditInteractor providesGetRedditUseCase(){
-    return new GetRedditUseCase();
+GetRedditInteractor providesGetRedditUseCase(GetRedditUseCase getRedditUseCase){
+    return getRedditUseCase;
 }
 
     @Provides

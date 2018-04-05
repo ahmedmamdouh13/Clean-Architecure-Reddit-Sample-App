@@ -5,8 +5,6 @@ import android.app.Application;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.di.component.DaggerComponent;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.di.module.AppModule;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.di.component.Component;
-import com.example.data.module.RepositoryModule;
-import com.example.domain.module.InteractorModule;
 
 import timber.log.Timber;
 

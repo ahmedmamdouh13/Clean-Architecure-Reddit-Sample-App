@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 
 /**
  * Created by ahmedmamdouh13 on 14/12/17.
@@ -17,16 +18,22 @@ import io.reactivex.Observable;
 public class GetRedditUseCase extends UseCase<Posts> implements GetRedditInteractor {
 
 
+    private RedditRepository exampleRepository;
 
     @Inject
-    RedditRepository exampleRepository;
+    public GetRedditUseCase( RedditRepository exampleRepository){
+        this.exampleRepository = exampleRepository;
+    }
 
-    @Inject
-    public GetRedditUseCase(){}
+
 
     @Override
     public Observable<Posts> createObservable() {
+        return null;
+    }
 
-        return exampleRepository.listTopics();
+    @Override
+    public void createPostObservable(Observer<Posts> observer) {
+         exampleRepository.listTopics(observer);
     }
 }

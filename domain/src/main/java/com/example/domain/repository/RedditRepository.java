@@ -3,6 +3,7 @@ package com.example.domain.repository;
 import com.example.domain.model.Posts;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 
 
 /**
@@ -11,7 +12,7 @@ import io.reactivex.Observable;
 
 public interface RedditRepository {
 
-    Observable<Posts> listTopics();
+    void listTopics(Observer<Posts> observer);
 
     void savePost(Posts posts);
 }
