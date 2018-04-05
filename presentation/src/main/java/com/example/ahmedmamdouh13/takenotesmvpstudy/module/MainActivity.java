@@ -43,11 +43,6 @@ public class MainActivity extends BaseActivity implements MainView {
     ArrayList savedList;
 
 
-    @Inject
-    RedditRepository repository;
-
-    @Inject
-    SavePostInteractor savePostUseCase;
 
 
     @Override
@@ -58,7 +53,7 @@ public class MainActivity extends BaseActivity implements MainView {
         presenter.bindContext(this);
         listView= findViewById(R.id.ListView);
 
-savePostUseCase.save(new Posts("am"));
+
         FAB= findViewById(R.id.FAB);
 
         RxView.clicks(FAB).subscribe(aVoid-> presenter.addNote());

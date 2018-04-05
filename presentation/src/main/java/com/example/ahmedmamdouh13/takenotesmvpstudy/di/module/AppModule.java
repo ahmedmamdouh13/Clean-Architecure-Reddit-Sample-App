@@ -40,11 +40,11 @@ public class AppModule {
     }
 
 
-    @Provides
-    @Singleton
-    RedditPresenter providesRedditPresenter(){
-        return new RedditPresenter();
-    }
+//    @Provides
+//    @Singleton
+//    RedditPresenter providesRedditPresenter(RedditPresenter redditPresenter){
+//        return redditPresenter;
+//    }
 
     @Provides
     @Singleton

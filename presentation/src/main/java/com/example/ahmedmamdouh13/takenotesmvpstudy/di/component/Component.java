@@ -1,5 +1,6 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy.di.component;
 
+import com.example.ahmedmamdouh13.takenotesmvpstudy.di.module.PresentationModule;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.module.MainActivity;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.module.RedditActivity;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.application.mApplication;
@@ -40,7 +41,7 @@ public interface Component extends AppDataComponent {
 
     SavePostInteractor providesSavePostUseCase();
 
-    RedditPresenter redditPresenter();
+  //  RedditPresenter redditPresenter();
 
     RedditRepository redditRepos();
 

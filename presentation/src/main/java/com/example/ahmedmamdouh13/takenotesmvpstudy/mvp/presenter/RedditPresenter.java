@@ -27,11 +27,6 @@ public class RedditPresenter extends BasePresenter<RedditView> {
 
 
     Posts pojo;
-
-  //  public RedditPresenter(){}
-  @Inject
-  RedditRepository repository;
-
     @Inject
     SavePostInteractor savePostUseCase;
 
@@ -39,15 +34,13 @@ public class RedditPresenter extends BasePresenter<RedditView> {
     @Inject
     public RedditPresenter(){
 
-
-       // this.savePostUseCase = savePostUseCase;
     }
 
 
     public void  save(String note, String title, int position){
 
 
-        savePostUseCase.save(new Posts());
+        savePostUseCase.save(new Posts("log this man please !"));
     }
 
     public void loadPosts(){
@@ -55,6 +48,9 @@ public class RedditPresenter extends BasePresenter<RedditView> {
     // useCase.execute(new RedditObserver());
 
     savePostUseCase.save(new Posts("ahmed"));
+        savePostUseCase.save(new Posts("log this man please !"));
+        savePostUseCase.save(new Posts("log this man please !"));
+        savePostUseCase.save(new Posts("log this man please !"));
 
    //  repository.savePost(new Posts("ahmed"));
 //        retrofitServive.listTopics()
