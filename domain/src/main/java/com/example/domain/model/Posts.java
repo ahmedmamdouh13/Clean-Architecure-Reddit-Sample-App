@@ -6,6 +6,8 @@ package com.example.domain.model;
 
 public class Posts {
     private String name;
+    private String imgurl;
+    private String article;
 
     public Posts() {
     }
@@ -13,6 +15,24 @@ public class Posts {
     public Posts(String string){
         name=string;
     }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
+    }
+
+
 
     public String getName() {
         return name;

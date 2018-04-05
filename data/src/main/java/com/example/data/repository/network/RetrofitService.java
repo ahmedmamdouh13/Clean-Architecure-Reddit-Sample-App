@@ -1,6 +1,7 @@
 package com.example.data.repository.network;
 
 import com.example.data.model.RedditPostsModel;
+import com.example.data.model.pojo.Example;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -16,7 +17,7 @@ public interface RetrofitService {
   //msclkgdzns5d830d2f3df0762cdce574705d9d9cf23d55b765
 
     @GET("/r/androiddev/new/.json")
-    Observable<RedditPostsModel> listTopics();
+    Observable<Example> listTopics();
 
 
 }

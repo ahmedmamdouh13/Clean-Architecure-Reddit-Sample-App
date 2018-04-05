@@ -2,6 +2,8 @@ package com.example.domain.repository;
 
 import com.example.domain.model.Posts;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 
@@ -12,7 +14,7 @@ import io.reactivex.Observer;
 
 public interface RedditRepository {
 
-    void listTopics(Observer<Posts> observer);
+    void listTopics(Observer<List<Posts>> observer);
 
     void savePost(Posts posts);
 }

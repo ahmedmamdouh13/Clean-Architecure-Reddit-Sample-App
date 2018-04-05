@@ -1,6 +1,7 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter;
 
 import android.content.Intent;
+import android.support.v7.app.WindowDecorActionBar;
 
 import com.example.ahmedmamdouh13.takenotesmvpstudy.module.MainActivity;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.base.BasePresenter;
@@ -15,10 +16,13 @@ import com.example.domain.usecase.SavePostUseCase;
 import com.example.domain.usecase.UseCase;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
 /**
  * Created by ahmedmamdouh13 on 11/09/17.
@@ -92,16 +96,21 @@ public class RedditPresenter extends BasePresenter<RedditView> {
     }
 
 
-    private  final class RedditObserver implements Observer<Posts>{
+    private  final class RedditObserver implements Observer<List<Posts>>{
         @Override
         public void onSubscribe(Disposable d) {
 
         }
 
         @Override
-        public void onNext(Posts example) {
+        public void onNext(List<Posts> example) {
+            for (int i = 0; i < example.size(); i++) {
 
-            pojo=example;
+                Timber.d(example.get(i).getName());
+                Timber.d(example.get(i).getArticle());
+                Timber.d(example.get(i).getImgurl());
+
+            }
 
         }
 

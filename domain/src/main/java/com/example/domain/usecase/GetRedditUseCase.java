@@ -5,6 +5,8 @@ package com.example.domain.usecase;
 import com.example.domain.model.Posts;
 import com.example.domain.repository.RedditRepository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 
@@ -33,7 +35,8 @@ public class GetRedditUseCase extends UseCase<Posts> implements GetRedditInterac
     }
 
     @Override
-    public void createPostObservable(Observer<Posts> observer) {
+    public void createPostObservable(Observer<List<Posts>> observer) {
+
          exampleRepository.listTopics(observer);
     }
 }

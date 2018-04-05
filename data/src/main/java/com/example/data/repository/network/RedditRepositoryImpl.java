@@ -6,11 +6,15 @@ import com.example.data.repository.db.RedditDB;
 import com.example.domain.model.Posts;
 import com.example.domain.repository.RedditRepository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by ahmedmamdouh13 on 15/12/17.
@@ -26,9 +30,13 @@ public class RedditRepositoryImpl implements RedditRepository {
    public RedditRepositoryImpl(){}
 
     @Override
-    public void listTopics(Observer<Posts> observer) {
+    public void listTopics(Observer<List<Posts>> observer) {
          RetrofitInstance.getRetrofitinstance().create(RetrofitService.class).listTopics()
-                .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel)).subscribe(observer);
+                .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel))
+                 .subscribeOn(Schedulers.io())
+
+                 .subscribeWith(observer);
+        Timber.d("networking in data layer");
     }
 
     @Override
