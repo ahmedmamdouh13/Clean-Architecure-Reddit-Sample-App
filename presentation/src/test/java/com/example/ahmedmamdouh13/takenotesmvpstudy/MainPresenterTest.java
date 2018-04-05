@@ -1,6 +1,9 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy;
 
-import android.content.Context;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.module.MainActivity;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.models.MainModel;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.presenter.MainPresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.mvp.view.MainView;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -10,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 /**
