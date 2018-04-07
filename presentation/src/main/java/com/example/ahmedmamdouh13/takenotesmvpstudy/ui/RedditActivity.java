@@ -45,6 +45,7 @@ public class RedditActivity extends AppCompatActivity implements RedditView {
 
 
 
+
 //        Intent intent= getIntent();
 //
 //        String title=intent.getStringExtra("title");
@@ -92,7 +93,7 @@ public class RedditActivity extends AppCompatActivity implements RedditView {
 
        // Timber.d(pojo.getData().getChildren().get(1).getData().getAuthor()+"  yes yessss");
         RecyclerView recyclerView= (RecyclerView) findViewById(R.id.recyclerView);
-        RecyclerAdapter recyclerAdapter=new RecyclerAdapter(this,pojo);
+        RecyclerAdapter recyclerAdapter=new RecyclerAdapter(this,pojo,redditPresenter);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

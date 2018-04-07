@@ -4,6 +4,7 @@ import com.example.domain.model.Posts;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 
 /**
@@ -12,5 +13,5 @@ import io.reactivex.Observer;
 
 public interface GetRedditInteractor {
 
-     void createPostObservable(Observer<List<Posts>> observer);
+     Observable<List<Posts>> createPostObservable();
 }

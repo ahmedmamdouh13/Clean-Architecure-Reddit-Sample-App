@@ -3,6 +3,7 @@ package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.mapper.PostModelViewMapper;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.mapper.PostModelViewMapperImpl;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base.BasePresenter;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models.POJO.PostModel;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.view.RedditView;
 import com.example.domain.model.Posts;
 import com.example.domain.interactor.GetRedditInteractor;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
@@ -39,15 +41,17 @@ public class RedditPresenter extends BasePresenter<RedditView> {
     }
 
 
-    public void  save(String note, String title, int position){
-
-
-        savePostUseCase.save(new Posts("log this man please !"));
+    @Override
+    public void savePost(PostModel postModel) {
+    savePostUseCase.save(mapper.mapPostModelToPost(postModel));
     }
 
     public void loadPosts(){
 
-    getRedditUseCase.createPostObservable(new RedditObserver());
+    getRedditUseCase.createPostObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(new RedditObserver());
+
 
 //    savePostUseCase.save(new Posts("ahmed"));
 //        savePostUseCase.save(new Posts("log this man please !"));

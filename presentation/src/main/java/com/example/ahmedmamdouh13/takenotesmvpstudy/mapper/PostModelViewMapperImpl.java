@@ -26,10 +26,22 @@ public class PostModelViewMapperImpl implements PostModelViewMapper {
          postModel.setName(posts.get(i).getName());
          postModel.setDexc(posts.get(i).getArticle());
          postModel.setImgurl(posts.get(i).getImgurl());
+         postModel.setSiteUrl(posts.get(i).getUrl());
 
          postModelList.add(postModel);
         }
 
         return postModelList;
+    }
+
+    public Posts mapPostModelToPost(PostModel postModel) {
+
+        Posts posts=new Posts();
+        posts.setArticle(postModel.getDexc());
+        posts.setImgurl(postModel.getImgurl());
+        posts.setName(postModel.getName());
+        posts.setUrl(postModel.getSiteUrl());
+
+        return posts;
     }
 }

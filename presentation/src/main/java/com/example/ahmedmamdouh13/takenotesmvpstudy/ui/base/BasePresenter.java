@@ -2,6 +2,8 @@ package com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base;
 
 import android.content.Context;
 
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models.POJO.PostModel;
+
 import javax.inject.Inject;
 
 /**
@@ -36,5 +38,9 @@ public class BasePresenter<T> {
 
     public Context getContext() {
         return context;
+    }
+
+    public void savePost(PostModel postModel) {
+
     }
 }

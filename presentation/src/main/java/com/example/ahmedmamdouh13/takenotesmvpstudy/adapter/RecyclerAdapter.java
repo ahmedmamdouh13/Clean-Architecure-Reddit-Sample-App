@@ -1,6 +1,9 @@
 package com.example.ahmedmamdouh13.takenotesmvpstudy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ahmedmamdouh13.takenotesmvpstudy.R;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.WebActivity;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.base.BasePresenter;
 import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.models.POJO.PostModel;
+import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter.RedditPresenter;
 import com.example.domain.model.Posts;
 import com.squareup.picasso.Picasso;
 
@@ -26,11 +32,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
 
     private  Context context;
     private List<PostModel> pojo;
+    private BasePresenter presenter;
 
-    public RecyclerAdapter(Context context, List<PostModel> pojo){
+    public RecyclerAdapter(Context context, List<PostModel> pojo, BasePresenter presenter){
 
         this.context = context;
         this.pojo = pojo;
+        this.presenter = presenter;
     }
 
     @Override
@@ -99,7 +107,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
         @Override
         public void onClick(View view) {
 //            context.startActivity(new Intent(context,WebActivity.class)
-//                    .putExtra("siteURL",pojo.getData().getChildren().get(position).getData().getUrl()));
+//                    .putExtra("siteURL",pojo.get(position).getSiteUrl()));
+
+           // presenter.savePost(pojo.get(position));
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(context, Uri.parse(pojo.get(position).getSiteUrl()));
+
         }
     }
 }

@@ -22,6 +22,7 @@ public class RedditDB  {
  public RedditDB(){}
 
     public void savePost(Posts posts) {
-        Timber.d(posts.getName()+" saved !");
+      //  Timber.d(posts.getName()+" saved !");
+
     }
 }

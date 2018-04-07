@@ -37,8 +37,8 @@ public class GetRedditUseCase extends UseCase<Posts> implements GetRedditInterac
     }
 
     @Override
-    public void createPostObservable(Observer<List<Posts>> observer) {
+    public Observable<List<Posts>>  createPostObservable() {
 
-         exampleRepository.listTopics(observer);
+        return exampleRepository.listTopics();
     }
 }

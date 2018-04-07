@@ -9,6 +9,7 @@ public class PostModel {
     private String name;
     private String imgurl;
     private String dexc;
+    private String siteUrl;
 
 
     public PostModel() {
@@ -44,4 +45,11 @@ public class PostModel {
         this.name = name;
     }
 
+    public String getSiteUrl() {
+        return siteUrl;
+    }
+
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
+    }
 }

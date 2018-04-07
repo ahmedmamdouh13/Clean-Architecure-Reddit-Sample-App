@@ -32,6 +32,7 @@ public class PostMapper {
             if (data.getPreview()!=null)
             post.setImgurl(data.getPreview().getImages().get(0).getSource().getUrl());
             post.setArticle(data.getSelftext());
+            post.setUrl(data.getUrl());
             postsList.add(post);
             Timber.d(data.getAuthor());
         }

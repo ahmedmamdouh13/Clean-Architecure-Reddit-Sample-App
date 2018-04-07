@@ -4,9 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 
-import com.example.ahmedmamdouh13.takenotesmvpstudy.mapper.PostModelViewMapper;
-import com.example.ahmedmamdouh13.takenotesmvpstudy.ui.mvp.presenter.MainPresenter;
-import com.example.data.repository.network.RedditRepositoryImpl;
+import com.example.data.repository.RedditRepositoryImpl;
 import com.example.domain.repository.RedditRepository;
 import com.example.domain.interactor.GetRedditInteractor;
 import com.example.domain.interactor.usecase.GetRedditUseCase;

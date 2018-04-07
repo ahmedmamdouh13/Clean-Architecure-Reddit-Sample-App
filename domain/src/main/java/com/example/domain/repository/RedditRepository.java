@@ -14,7 +14,7 @@ import io.reactivex.Observer;
 
 public interface RedditRepository {
 
-    void listTopics(Observer<List<Posts>> observer);
+    Observable<List<Posts>> listTopics();
 
     void savePost(Posts posts);
 }

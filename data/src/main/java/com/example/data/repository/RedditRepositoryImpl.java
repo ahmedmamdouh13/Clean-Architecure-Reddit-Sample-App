@@ -1,8 +1,10 @@
-package com.example.data.repository.network;
+package com.example.data.repository;
 
 import com.example.data.model.RedditPostsModel;
 import com.example.data.model.mapper.PostMapper;
 import com.example.data.repository.db.RedditDB;
+import com.example.data.repository.network.RetrofitInstance;
+import com.example.data.repository.network.RetrofitService;
 import com.example.domain.model.Posts;
 import com.example.domain.repository.RedditRepository;
 
@@ -31,13 +33,12 @@ public class RedditRepositoryImpl implements RedditRepository {
    public RedditRepositoryImpl(){}
 
     @Override
-    public void listTopics(Observer<List<Posts>> observer) {
-         RetrofitInstance.getRetrofitinstance().create(RetrofitService.class).listTopics()
-                .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel))
-                 .subscribeOn(Schedulers.io())
-                 .observeOn(AndroidSchedulers.mainThread())
-                 .subscribeWith(observer);
-        Timber.d("networking in data layer");
+    public Observable<List<Posts>>  listTopics() {
+       return RetrofitInstance.getRetrofitinstance().create(RetrofitService.class)
+               .listTopics()
+               .subscribeOn(Schedulers.io())
+                .map(redditPostsModel -> postMapper.mapToPosts(redditPostsModel));
+      //  Timber.d("networking in data layer");
     }
 
     @Override
